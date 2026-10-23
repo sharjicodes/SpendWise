@@ -1,6 +1,9 @@
 .install-banner{width:min(1160px,calc(100% - 64px));display:flex;align-items:center;gap:13px;margin:14px auto;padding:12px 14px;border:1px solid #d4e6d8;border-radius:16px;background:#edf6ee;color:#253b30}
 .install-icon{width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;border-radius:13px;background:#fff}
 .install-icon img,.install-help-head img{display:block;border-radius:11px}
+.install-icon svg,.install-action svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.install-icon svg{color:var(--green)}
+.install-action{display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .install-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
 .install-copy strong{font:700 13px var(--display)}
 .install-copy span{color:#687970;font-size:11px;line-height:1.45}
@@ -17,3 +20,4 @@
 .install-help li::marker{color:var(--green);font-weight:800}
 .install-help-done{width:100%;min-height:44px}
 @media(max-width:640px){.install-banner{width:calc(100% - 32px);gap:10px;margin:10px auto;padding:10px;border-radius:14px}.install-icon{width:38px;height:38px}.install-icon img{width:34px;height:34px}.install-copy strong{font-size:11px}.install-copy span{font-size:9px}.install-action{min-height:36px;padding:0 10px;font-size:10px}.install-dismiss{width:28px;height:32px}.install-help{padding:20px;border-radius:20px}}
+@media(pointer:coarse){html,body{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}}

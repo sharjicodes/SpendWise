@@ -1,0 +1,1 @@
+ALTER TABLE "money_profile" ADD COLUMN "last_reviewed_cycle" text;

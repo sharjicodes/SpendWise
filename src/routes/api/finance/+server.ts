@@ -1,4 +1,4 @@
-import { db } from '#lib/server/db.js';
+import { getDb } from '#lib/server/db.js';
 import { moneyProfile, salaryCycle } from '#lib/server/schema.js';
 import { financeSnapshot, saveExpense } from '#lib/server/finance.js';
 import { eq } from 'drizzle-orm';
@@ -33,6 +33,7 @@ export const PUT: RequestHandler = async ({ locals, request }) => {
 		if (!Number.isInteger(payday) || payday < 1 || payday > 31) return jsonError('Choose a payday from 1 to 31.');
 		const today = localDate('Asia/Kolkata');
 		const cycleId = `cycle-${paydayCycle(today, payday).startsOn}`;
+		const db = getDb();
 		await db.insert(moneyProfile).values({ userId: locals.user.id, expectedIncomeMinor: salary, rentLivingMinor: rent, savingsMinor: savings, creditCardMinor: creditCard, emiMinor: emi, othersMinor: others, otherCommitmentsMinor: otherCommitments, payday, timezone: 'Asia/Kolkata', lastReviewedCycle: cycleId }).onConflictDoUpdate({ target: moneyProfile.userId, set: { expectedIncomeMinor: salary, rentLivingMinor: rent, savingsMinor: savings, creditCardMinor: creditCard, emiMinor: emi, othersMinor: others, otherCommitmentsMinor: otherCommitments, payday, lastReviewedCycle: cycleId, updatedAt: new Date() } });
 		const dates = paydayCycle(today, payday);
 		await db.insert(salaryCycle).values({ id: cycleId, userId: locals.user.id, startsOn: dates.startsOn, endsOn: dates.endsOn, alreadySpentMinor: alreadySpent }).onConflictDoUpdate({ target: [salaryCycle.userId, salaryCycle.startsOn], set: { endsOn: dates.endsOn, alreadySpentMinor: alreadySpent } });
@@ -43,6 +44,7 @@ export const PUT: RequestHandler = async ({ locals, request }) => {
 export const PATCH: RequestHandler = async ({ locals }) => {
 	if (!locals.user) return jsonError('Sign in to confirm your pay plan.', 401);
 	try {
+		const db = getDb();
 		const [profile] = await db.select().from(moneyProfile).where(eq(moneyProfile.userId, locals.user.id)).limit(1);
 		if (!profile?.payday) return jsonError('Set up your pay plan first.');
 		const cycleId = `cycle-${paydayCycle(localDate(profile.timezone), profile.payday).startsOn}`;

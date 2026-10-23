@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from '@better-auth/drizzle-adapter';
 import * as env from '$app/env/private';
-import { db } from './db';
+import { getDb } from './db';
 import { schema } from './schema';
 
 const authSecret = env.BETTER_AUTH_SECRET;
@@ -14,7 +14,7 @@ export const auth = betterAuth({
 	secret: authSecret,
 	baseURL: authUrl,
 	basePath: '/api/auth',
-	database: drizzleAdapter(db, { provider: 'pg', schema }),
+	database: drizzleAdapter(getDb(), { provider: 'pg', schema }),
 	emailAndPassword: { enabled: true },
 	trustedOrigins: [authUrl]
 });

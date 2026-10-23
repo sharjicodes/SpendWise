@@ -3,12 +3,15 @@ import postgres from 'postgres';
 import * as env from '$app/env/private';
 import { schema } from './schema';
 
-const databaseUrl = env.DATABASE_URL;
-if (!databaseUrl) throw new Error('DATABASE_URL is required to use the SpendWise database.');
+let database: ReturnType<typeof drizzle> | undefined;
 
-const client = postgres(databaseUrl, {
-	max: Number(env.DATABASE_POOL_SIZE || 5),
-	prepare: false
-});
-
-export const db = drizzle(client, { schema });
+export function getDb() {
+	if (database) return database;
+	if (!env.DATABASE_URL) throw new Error('DATABASE_URL is required to use the SpendWise database.');
+	const client = postgres(env.DATABASE_URL, {
+		max: Number(env.DATABASE_POOL_SIZE || 5),
+		prepare: false
+	});
+	database = drizzle(client, { schema });
+	return database;
+}

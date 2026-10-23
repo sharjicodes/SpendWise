@@ -1,9 +1,10 @@
 import { and, desc, eq } from 'drizzle-orm';
 import { paydayCycle, localDate, budgetSummary } from '#lib/budget.js';
-import { db } from './db';
+import { getDb } from './db';
 import { moneyProfile, salaryCycle, transaction } from './schema';
 
 export async function financeSnapshot(userId: string) {
+	const db = getDb();
 	const [profile] = await db.select().from(moneyProfile).where(eq(moneyProfile.userId, userId)).limit(1);
 	if (!profile?.payday || !profile.expectedIncomeMinor) return { profile: profile ? serializeProfile(profile) : null, cycle: null, summary: null, expenses: [] };
 	const today = localDate(profile.timezone);
@@ -29,6 +30,7 @@ export function serializeProfile(profile: typeof moneyProfile.$inferSelect) {
 }
 
 export async function saveExpense(userId: string, body: { description: string; category: string; amountMinor: string; date?: string }) {
+	const db = getDb();
 	const [profile] = await db.select().from(moneyProfile).where(eq(moneyProfile.userId, userId)).limit(1);
 	if (!profile?.payday || !profile.expectedIncomeMinor) throw new Error('Complete your pay plan before adding expenses.');
 	const today = localDate(profile.timezone);

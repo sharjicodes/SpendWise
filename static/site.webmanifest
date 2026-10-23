@@ -1,1 +1,17 @@
-{"id":"/","name":"SpendWise — Know your money","short_name":"SpendWise","description":"Plan salary, bills, savings and spending around payday.","start_url":"/app","scope":"/","display":"standalone","background_color":"#f6f8f6","theme_color":"#f6f8f6","icons":[{"src":"/spendwise-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+	"id": "/",
+	"name": "SpendWise — Know your money",
+	"short_name": "SpendWise",
+	"description": "Plan salary, bills, savings and spending around payday.",
+	"start_url": "/app",
+	"scope": "/",
+	"display": "standalone",
+	"background_color": "#f6f8f6",
+	"theme_color": "#f6f8f6",
+	"icons": [
+		{ "src": "/spendwise-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "/spendwise-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{ "src": "/spendwise-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+		{ "src": "/spendwise-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+	]
+}

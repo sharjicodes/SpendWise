@@ -1,0 +1,19 @@
+.install-banner{width:min(1160px,calc(100% - 64px));display:flex;align-items:center;gap:13px;margin:14px auto;padding:12px 14px;border:1px solid #d4e6d8;border-radius:16px;background:#edf6ee;color:#253b30}
+.install-icon{width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;border-radius:13px;background:#fff}
+.install-icon img,.install-help-head img{display:block;border-radius:11px}
+.install-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.install-copy strong{font:700 13px var(--display)}
+.install-copy span{color:#687970;font-size:11px;line-height:1.45}
+.install-action{min-height:38px;padding:0 15px;border:0;border-radius:11px;background:var(--green);color:#fff;font-size:11px;font-weight:700;cursor:pointer}
+.install-action:hover{background:var(--green-dark)}
+.install-dismiss{width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto;border:0;border-radius:10px;background:transparent;color:#63746a;font-size:22px;line-height:1;cursor:pointer}
+.install-dismiss:hover{background:#dfece1}
+.install-help{width:min(420px,calc(100% - 32px));padding:24px;border:1px solid #dfe7e1;border-radius:22px;background:#fff;color:#15231f;box-shadow:0 24px 90px #173b2633}
+.install-help::backdrop{background:#11241c77;backdrop-filter:blur(3px)}
+.install-help-head{display:flex;justify-content:space-between;align-items:center}
+.install-help h2{margin:20px 0 8px;font:800 23px/1.2 var(--display);letter-spacing:-.7px}
+.install-help p{margin:0;color:#68756f;font-size:13px;line-height:1.55}
+.install-help ol{display:grid;gap:10px;margin:16px 0 22px;padding-left:20px;color:#4f6056;font-size:13px;line-height:1.55}
+.install-help li::marker{color:var(--green);font-weight:800}
+.install-help-done{width:100%;min-height:44px}
+@media(max-width:640px){.install-banner{width:calc(100% - 32px);gap:10px;margin:10px auto;padding:10px;border-radius:14px}.install-icon{width:38px;height:38px}.install-icon img{width:34px;height:34px}.install-copy strong{font-size:11px}.install-copy span{font-size:9px}.install-action{min-height:36px;padding:0 10px;font-size:10px}.install-dismiss{width:28px;height:32px}.install-help{padding:20px;border-radius:20px}}
